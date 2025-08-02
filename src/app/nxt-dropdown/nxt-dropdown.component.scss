@@ -129,7 +129,7 @@
     }
     
     .nxt-dropdown-value {
-      margin-top: 4px;
+      margin-top: 8px;
     }
   }
 
@@ -146,10 +146,12 @@
       font-size: 0.875rem;
       color: #6b7280;
       font-weight: 400;
+      left: 8px;
     }
     
     .nxt-dropdown-value {
-      margin-top: 4px;
+      margin-top: 8px;
+      padding-left: 0;
     }
   }
 
@@ -164,6 +166,7 @@
       font-size: 0.75rem;
       color: #1976d2;
       font-weight: 500;
+      left: 8px;
     }
   }
 
@@ -175,6 +178,7 @@
       font-size: 0.75rem;
       color: #374151;
       font-weight: 500;
+      left: 8px;
     }
   }
 
@@ -207,7 +211,13 @@
   
   // Adjust positioning when iftalabel is present
   .has-iftalabel & {
-    margin-top: 4px;
+    margin-top: 8px;
+  }
+  
+  // Ensure proper left alignment for floatlabel
+  .has-floatlabel & {
+    justify-content: flex-start;
+    text-align: left;
   }
 }
 
