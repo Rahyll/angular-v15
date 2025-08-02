@@ -143,6 +143,33 @@
           </div>
           <p class="result">Valid: {{ requiredValue ? 'Yes' : 'No' }}</p>
         </div>
+
+        <div class="demo-card">
+          <h3>With Built-in IftaLabel</h3>
+          <nxt-dropdown
+            [(ngModel)]="iftalabelValue"
+            [options]="options"
+            [useIftaLabel]="true"
+            [iftaLabelText]="'Select Option'"
+            placeholder="Select an option"
+            (selectionChange)="onSelectionChange($event)">
+          </nxt-dropdown>
+          <p class="result">Selected: {{ iftalabelValue || 'None' }}</p>
+        </div>
+
+        <div class="demo-card">
+          <h3>IftaLabel with Multiple Selection</h3>
+          <nxt-dropdown
+            [(ngModel)]="iftalabelMultipleValue"
+            [options]="options"
+            [useIftaLabel]="true"
+            [iftaLabelText]="'Select Multiple Options'"
+            [multiple]="true"
+            placeholder="Select multiple options"
+            (selectionChange)="onSelectionChange($event)">
+          </nxt-dropdown>
+          <p class="result">Selected: {{ iftalabelMultipleValue.length }} items</p>
+        </div>
       </div>
     </div>
 
@@ -1123,6 +1150,19 @@ export class AppModule {{ '{' }} {{ '}' }}</code></pre>
   placeholder="Select an option"&gt;
 &lt;/nxt-dropdown&gt;</code></pre>
         </div>
+
+        <div class="code-block">
+          <h4>3. With Built-in IftaLabel (Infield Top Aligned Labels)</h4>
+          <pre><code>&lt;nxt-dropdown
+  [(ngModel)]="selectedValue"
+  [options]="options"
+  [useIftaLabel]="true"
+  [iftaLabelText]="'Select Option'"
+  [required]="true"
+  placeholder="Select an option"&gt;
+&lt;/nxt-dropdown&gt;</code></pre>
+          <p><strong>Built-in IftaLabel</strong> provides infield top aligned labels directly within the NXT dropdown component. When <code>useIftaLabel</code> is true, <code>iftaLabelText</code> is required.</p>
+        </div>
       </div>
 
       <!-- Input Properties -->
@@ -1199,6 +1239,18 @@ export class AppModule {{ '{' }} {{ '}' }}</code></pre>
                 <td><code>'caret' | 'arrow' | 'sharp-caret'</code></td>
                 <td><code>'caret'</code></td>
                 <td>Type of dropdown icon: 'caret' for chevron, 'arrow' for down arrow, or 'sharp-caret' for sharp-cornered triangle</td>
+              </tr>
+              <tr>
+                <td><code>useIftaLabel</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Enable infield top aligned label styling</td>
+              </tr>
+              <tr>
+                <td><code>iftaLabelText</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Label text to display when useIftaLabel is true (required when useIftaLabel is true)</td>
               </tr>
               <tr>
                 <td><code>applyButtonText</code></td>

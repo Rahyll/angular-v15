@@ -16,6 +16,8 @@ export class NxtDropdownDemoComponent implements OnInit {
   selectedMultipleValues: any[] = [];
   selectedMultipleValuesWithConfirmation: any[] = [];
   requiredValue: any = null;
+  iftalabelValue: any = null;
+  iftalabelMultipleValue: any[] = [];
 
   // Advanced demo values
   largeDatasetValue: any[] = [];

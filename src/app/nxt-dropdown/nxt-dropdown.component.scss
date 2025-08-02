@@ -1,3 +1,20 @@
+// IftaLabel Styles
+.nxt-dropdown-iftalabel-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  .nxt-dropdown-iftalabel-input-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  &.nxt-dropdown-iftalabel--required .nxt-dropdown-iftalabel {
+    color: #dc2626;
+  }
+}
+
 .nxt-dropdown-container {
   position: relative;
   width: 100%;
@@ -55,6 +72,53 @@
   outline: none;
   box-sizing: border-box;
 
+  // Floating Label Styles
+  .nxt-dropdown-iftalabel {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-weight: 500;
+    color: #6b7280;
+    line-height: 1.25;
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 1;
+    
+    .nxt-dropdown-iftalabel-required {
+      color: #ef4444;
+      margin-left: 0.25rem;
+      font-weight: 600;
+    }
+  }
+
+  // Adjust padding when label is present
+  &.has-iftalabel {
+    padding-top: 16px;
+    padding-bottom: 8px;
+    
+    .nxt-dropdown-iftalabel {
+      top: 8px;
+      transform: none;
+      font-size: 0.75rem;
+      color: #374151;
+    }
+    
+    .nxt-dropdown-value {
+      margin-top: 4px;
+    }
+  }
+
+  // When dropdown is open or has value, keep label small
+  &.open .nxt-dropdown-iftalabel,
+  .nxt-dropdown-container.has-value & .nxt-dropdown-iftalabel {
+    top: 8px;
+    transform: none;
+    font-size: 0.75rem;
+    color: #374151;
+  }
+
   &:hover:not(.disabled) {
     border-color: #1976d2;
   }
@@ -72,11 +136,21 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  
+  // Adjust positioning when iftalabel is present
+  .has-iftalabel & {
+    margin-top: 4px;
+  }
 }
 
 .nxt-dropdown-placeholder {
   color: #6a737d;
   font-style: italic;
+  
+  // Hide placeholder when iftalabel is present and no value is selected
+  .has-iftalabel & {
+    opacity: 0;
+  }
 }
 
 .nxt-dropdown-selected {

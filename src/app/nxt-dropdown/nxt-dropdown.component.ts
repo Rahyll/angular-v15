@@ -26,6 +26,8 @@ export interface NxtDropdownConfig {
   searchPlaceholder?: string;
   minSearchLength?: number;
   showDescriptions?: boolean;
+  useIftaLabel?: boolean;
+  iftaLabelText?: string;
   showGroups?: boolean;
   iconType?: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle';
   confirmationButtons?: {
@@ -64,6 +66,9 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   @Input() searchable: boolean = false;
   @Input() searchPlaceholder: string = 'Search options...';
   @Input() minSearchLength: number = 0;
+  @Input() showDescriptions: boolean = false;
+  @Input() useIftaLabel: boolean = false;
+  @Input() iftaLabelText: string = '';
   @Input() iconType: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' = 'caret';
   
   // Confirmation button customization
@@ -96,6 +101,9 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   private _searchable: boolean = false;
   private _searchPlaceholder: string = 'Search options...';
   private _minSearchLength: number = 0;
+  private _showDescriptions: boolean = false;
+  private _useIftaLabel: boolean = false;
+  private _iftaLabelText: string = '';
   private _iconType: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' = 'caret';
   
   // Confirmation button customization
@@ -125,6 +133,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   ) {}
 
   ngOnInit() {
+    this.validateIftaLabelConfiguration();
     this.updateConfiguration();
     this.isDisabled = this._disabled;
     this.updateSelectedOptions();
@@ -258,6 +267,9 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
       this._searchable = this.config.searchable !== undefined ? this.config.searchable : (this.searchable || false);
       this._searchPlaceholder = this.config.searchPlaceholder || this.searchPlaceholder || 'Search options...';
       this._minSearchLength = this.config.minSearchLength !== undefined ? this.config.minSearchLength : (this.minSearchLength || 0);
+      this._showDescriptions = this.config.showDescriptions !== undefined ? this.config.showDescriptions : (this.showDescriptions || false);
+      this._useIftaLabel = this.config.useIftaLabel !== undefined ? this.config.useIftaLabel : (this.useIftaLabel || false);
+      this._iftaLabelText = this.config.iftaLabelText || this.iftaLabelText || '';
       this._iconType = this.config.iconType || this.iconType || 'caret';
       
       // Confirmation button configuration
@@ -285,6 +297,9 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
       this._searchable = this.searchable !== undefined ? this.searchable : (this.config.searchable || false);
       this._searchPlaceholder = this.searchPlaceholder !== 'Search options...' ? this.searchPlaceholder : (this.config.searchPlaceholder || 'Search options...');
       this._minSearchLength = this.minSearchLength !== undefined ? this.minSearchLength : (this.config.minSearchLength || 0);
+      this._showDescriptions = this.showDescriptions !== undefined ? this.showDescriptions : (this.config.showDescriptions || false);
+      this._useIftaLabel = this.useIftaLabel !== undefined ? this.useIftaLabel : (this.config.useIftaLabel || false);
+      this._iftaLabelText = this.iftaLabelText !== '' ? this.iftaLabelText : (this.config.iftaLabelText || '');
       this._iconType = this.iconType !== 'caret' ? this.iconType : (this.config.iconType || 'caret');
       
       // Confirmation button configuration (non-strict mode)
@@ -299,6 +314,32 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
     console.log('[NXT Dropdown] Final placeholder:', this._placeholder);
     console.log('[NXT Dropdown] Final searchable:', this._searchable);
     console.log('[NXT Dropdown] Final searchPlaceholder:', this._searchPlaceholder);
+  }
+
+  private validateIftaLabelConfiguration(): void {
+    if (this._useIftaLabel && !this._iftaLabelText.trim()) {
+      console.error(
+        '%c[NXT Dropdown] IftaLabel Configuration Error:',
+        'color: #d32f2f; font-weight: bold; font-size: 14px;'
+      );
+      console.error(
+        '%cWhen useIftaLabel is true, iftaLabelText is required.',
+        'color: #d32f2f; font-size: 12px;'
+      );
+      console.error(
+        '%cPlease provide a label text:',
+        'color: #1976d2; font-weight: bold; font-size: 12px;'
+      );
+      console.error(`
+        <nxt-dropdown
+          [useIftaLabel]="true"
+          [iftaLabelText]="'Your Label Text'"
+          [options]="options"
+          [(ngModel)]="selectedValue">
+        </nxt-dropdown>
+      `);
+      throw new Error('IftaLabel configuration error: iftaLabelText is required when useIftaLabel is true');
+    }
   }
 
   private validateStrictConfiguration(): void {
@@ -433,6 +474,18 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
 
   get currentMinSearchLength(): number {
     return this._minSearchLength;
+  }
+
+  get currentShowDescriptions(): boolean {
+    return this._showDescriptions;
+  }
+
+  get currentUseIftaLabel(): boolean {
+    return this._useIftaLabel;
+  }
+
+  get currentIftaLabelText(): string {
+    return this._iftaLabelText;
   }
 
   get currentIconType(): 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' {

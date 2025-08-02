@@ -12,8 +12,21 @@ import { NxtDropdownTriggerComponent } from './nxt-dropdown/nxt-dropdown-trigger
 import { NxtDropdownDemoComponent } from './nxt-dropdown-demo/nxt-dropdown-demo.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, MaterialModule],
-  declarations: [AppComponent, HelloComponent, NxtDropdownComponent, NxtOptionComponent, NxtOptionGroupComponent, NxtDropdownTriggerComponent, NxtDropdownDemoComponent],
+  imports: [
+    BrowserModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    MaterialModule
+  ],
+  declarations: [
+    AppComponent, 
+    HelloComponent, 
+    NxtDropdownComponent, 
+    NxtOptionComponent, 
+    NxtOptionGroupComponent, 
+    NxtDropdownTriggerComponent, 
+    NxtDropdownDemoComponent
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
