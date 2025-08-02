@@ -22,17 +22,28 @@
        *ngIf="!hasCustomTrigger"
        (click)="toggleDropdown()"
        (keydown)="onKeyDown($event)"
+       (focus)="onFocus()"
+       (blur)="onBlur()"
        tabindex="0"
        role="combobox"
        [attr.aria-expanded]="isOpen"
        [attr.aria-haspopup]="true"
        [attr.aria-label]="currentPlaceholder"
-       [class.has-iftalabel]="currentUseIftaLabel">
+       [class.has-iftalabel]="currentUseIftaLabel"
+       [class.has-floatlabel]="currentFloatlabel"
+       [class.floatlabel-focused]="currentFloatlabel && isFocused"
+       [class.floatlabel-has-value]="currentFloatlabel && (currentConfirmation && currentMultiple ? pendingOptions : selectedOptions).length > 0">
     
     <!-- Floating Label -->
     <label class="nxt-dropdown-iftalabel" *ngIf="currentUseIftaLabel">
       {{ currentIftaLabelText }}
       <span *ngIf="currentRequired" class="nxt-dropdown-iftalabel-required">*</span>
+    </label>
+    
+    <!-- Float Label (new floating label animation) -->
+    <label class="nxt-dropdown-floatlabel" *ngIf="currentFloatlabel">
+      {{ currentPlaceholder }}
+      <span *ngIf="currentRequired" class="nxt-dropdown-floatlabel-required">*</span>
     </label>
     
     <div class="nxt-dropdown-value">
@@ -221,11 +232,22 @@
        *ngIf="!hasCustomTrigger"
        (click)="toggleDropdown()"
        (keydown)="onKeyDown($event)"
+       (focus)="onFocus()"
+       (blur)="onBlur()"
        tabindex="0"
        role="combobox"
        [attr.aria-expanded]="isOpen"
        [attr.aria-haspopup]="true"
-       [attr.aria-label]="currentPlaceholder">
+       [attr.aria-label]="currentPlaceholder"
+       [class.has-floatlabel]="currentFloatlabel"
+       [class.floatlabel-focused]="currentFloatlabel && isFocused"
+       [class.floatlabel-has-value]="currentFloatlabel && (currentConfirmation && currentMultiple ? pendingOptions : selectedOptions).length > 0">
+    
+    <!-- Float Label (new floating label animation) -->
+    <label class="nxt-dropdown-floatlabel" *ngIf="currentFloatlabel">
+      {{ currentPlaceholder }}
+      <span *ngIf="currentRequired" class="nxt-dropdown-floatlabel-required">*</span>
+    </label>
     
     <div class="nxt-dropdown-value">
       <div class="nxt-dropdown-placeholder" *ngIf="(currentConfirmation && currentMultiple ? pendingOptions : selectedOptions).length === 0">

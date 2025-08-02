@@ -28,6 +28,7 @@ export interface NxtDropdownConfig {
   showDescriptions?: boolean;
   useIftaLabel?: boolean;
   iftaLabelText?: string;
+  floatlabel?: boolean;
   showGroups?: boolean;
   iconType?: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle';
   confirmationButtons?: {
@@ -69,6 +70,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   @Input() showDescriptions: boolean = false;
   @Input() useIftaLabel: boolean = false;
   @Input() iftaLabelText: string = '';
+  @Input() floatlabel: boolean = false;
   @Input() iconType: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' = 'caret';
   
   // Confirmation button customization
@@ -104,6 +106,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   private _showDescriptions: boolean = false;
   private _useIftaLabel: boolean = false;
   private _iftaLabelText: string = '';
+  private _floatlabel: boolean = false;
   private _iconType: 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' = 'caret';
   
   // Confirmation button customization
@@ -115,6 +118,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
   value: any;
   isDisabled: boolean = false;
   isOpen: boolean = false;
+  isFocused: boolean = false;
   selectedOptions: NxtDropdownOption[] = [];
   pendingOptions: NxtDropdownOption[] = []; // For confirmation mode
   
@@ -270,6 +274,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
       this._showDescriptions = this.config.showDescriptions !== undefined ? this.config.showDescriptions : (this.showDescriptions || false);
       this._useIftaLabel = this.config.useIftaLabel !== undefined ? this.config.useIftaLabel : (this.useIftaLabel || false);
       this._iftaLabelText = this.config.iftaLabelText || this.iftaLabelText || '';
+      this._floatlabel = this.config.floatlabel !== undefined ? this.config.floatlabel : (this.floatlabel || false);
       this._iconType = this.config.iconType || this.iconType || 'caret';
       
       // Confirmation button configuration
@@ -300,6 +305,7 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
       this._showDescriptions = this.showDescriptions !== undefined ? this.showDescriptions : (this.config.showDescriptions || false);
       this._useIftaLabel = this.useIftaLabel !== undefined ? this.useIftaLabel : (this.config.useIftaLabel || false);
       this._iftaLabelText = this.iftaLabelText !== '' ? this.iftaLabelText : (this.config.iftaLabelText || '');
+      this._floatlabel = this.floatlabel !== undefined ? this.floatlabel : (this.config.floatlabel || false);
       this._iconType = this.iconType !== 'caret' ? this.iconType : (this.config.iconType || 'caret');
       
       // Confirmation button configuration (non-strict mode)
@@ -486,6 +492,10 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
 
   get currentIftaLabelText(): string {
     return this._iftaLabelText;
+  }
+
+  get currentFloatlabel(): boolean {
+    return this._floatlabel;
   }
 
   get currentIconType(): 'caret' | 'arrow' | 'sharp-caret' | 'inverted-triangle' {
@@ -831,6 +841,15 @@ export class NxtDropdownComponent implements ControlValueAccessor, OnInit, OnCha
         }
         break;
     }
+  }
+
+  onFocus(): void {
+    this.isFocused = true;
+    this.onTouched();
+  }
+
+  onBlur(): void {
+    this.isFocused = false;
   }
 
   trackByValue(index: number, option: NxtDropdownOption): any {

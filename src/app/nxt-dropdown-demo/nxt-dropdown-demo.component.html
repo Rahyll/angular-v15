@@ -170,6 +170,37 @@
           </nxt-dropdown>
           <p class="result">Selected: {{ iftalabelMultipleValue.length }} items</p>
         </div>
+
+        <div class="demo-card">
+          <h3>Floating Label Animation</h3>
+          <nxt-dropdown
+            [(ngModel)]="floatlabelValue"
+            [options]="options"
+            [floatlabel]="true"
+            placeholder="Select an option"
+            (selectionChange)="onSelectionChange($event)">
+          </nxt-dropdown>
+          <p class="result">Selected: {{ floatlabelValue || 'None' }}</p>
+          <div class="code-example">
+            <small>Label animates up when focused or has value</small>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <h3>Floating Label with Multiple Selection</h3>
+          <nxt-dropdown
+            [(ngModel)]="floatlabelMultipleValue"
+            [options]="options"
+            [floatlabel]="true"
+            [multiple]="true"
+            placeholder="Select multiple options"
+            (selectionChange)="onSelectionChange($event)">
+          </nxt-dropdown>
+          <p class="result">Selected: {{ floatlabelMultipleValue.length }} items</p>
+          <div class="code-example">
+            <small>Floating label with multiple selection support</small>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1163,6 +1194,18 @@ export class AppModule {{ '{' }} {{ '}' }}</code></pre>
 &lt;/nxt-dropdown&gt;</code></pre>
           <p><strong>Built-in IftaLabel</strong> provides infield top aligned labels directly within the NXT dropdown component. When <code>useIftaLabel</code> is true, <code>iftaLabelText</code> is required.</p>
         </div>
+
+        <div class="code-block">
+          <h4>4. With Floating Label Animation</h4>
+          <pre><code>&lt;nxt-dropdown
+  [(ngModel)]="selectedValue"
+  [options]="options"
+  [floatlabel]="true"
+  [required]="true"
+  placeholder="Select an option"&gt;
+&lt;/nxt-dropdown&gt;</code></pre>
+          <p><strong>Floating Label Animation</strong> provides a smooth animation where the placeholder text moves up to become a label when the dropdown is focused or has a value selected. The label animates back down when the dropdown loses focus and has no value.</p>
+        </div>
       </div>
 
       <!-- Input Properties -->
@@ -1251,6 +1294,12 @@ export class AppModule {{ '{' }} {{ '}' }}</code></pre>
                 <td><code>string</code></td>
                 <td><code>''</code></td>
                 <td>Label text to display when useIftaLabel is true (required when useIftaLabel is true)</td>
+              </tr>
+              <tr>
+                <td><code>floatlabel</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Enable floating label animation where placeholder moves up when focused or has value</td>
               </tr>
               <tr>
                 <td><code>applyButtonText</code></td>

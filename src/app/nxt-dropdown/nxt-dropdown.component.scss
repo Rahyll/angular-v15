@@ -93,6 +93,29 @@
     }
   }
 
+  // Float Label Styles (new floating label animation)
+  .nxt-dropdown-floatlabel {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-weight: 400;
+    color: #6b7280;
+    line-height: 1.25;
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    background-color: #ffffff;
+    padding: 0 4px;
+    
+    .nxt-dropdown-floatlabel-required {
+      color: #ef4444;
+      margin-left: 0.25rem;
+      font-weight: 600;
+    }
+  }
+
   // Adjust padding when label is present
   &.has-iftalabel {
     padding-top: 16px;
@@ -107,6 +130,51 @@
     
     .nxt-dropdown-value {
       margin-top: 4px;
+    }
+  }
+
+  // Float label animation states - always maintain consistent height
+  &.has-floatlabel {
+    // Always maintain increased padding for consistent height
+    padding-top: 16px;
+    padding-bottom: 8px;
+    
+    .nxt-dropdown-floatlabel {
+      // Default state - label in center
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 400;
+    }
+    
+    .nxt-dropdown-value {
+      margin-top: 4px;
+    }
+  }
+
+  // Float label focused state
+  &.floatlabel-focused {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+    
+    .nxt-dropdown-floatlabel {
+      top: 8px;
+      transform: none;
+      font-size: 0.75rem;
+      color: #1976d2;
+      font-weight: 500;
+    }
+  }
+
+  // Float label has value state
+  &.floatlabel-has-value {
+    .nxt-dropdown-floatlabel {
+      top: 8px;
+      transform: none;
+      font-size: 0.75rem;
+      color: #374151;
+      font-weight: 500;
     }
   }
 
@@ -149,6 +217,11 @@
   
   // Hide placeholder when iftalabel is present and no value is selected
   .has-iftalabel & {
+    opacity: 0;
+  }
+  
+  // Hide placeholder when floatlabel is present
+  .has-floatlabel & {
     opacity: 0;
   }
 }

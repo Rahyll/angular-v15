@@ -18,6 +18,8 @@ export class NxtDropdownDemoComponent implements OnInit {
   requiredValue: any = null;
   iftalabelValue: any = null;
   iftalabelMultipleValue: any[] = [];
+  floatlabelValue: any = null;
+  floatlabelMultipleValue: any[] = [];
 
   // Advanced demo values
   largeDatasetValue: any[] = [];
@@ -252,6 +254,10 @@ export class NxtDropdownDemoComponent implements OnInit {
     this.customTriggerStatusValue = null;
     this.customTriggerNoArrowValue = null;
     this.customTriggerRichValue = null;
+    this.iftalabelValue = null;
+    this.iftalabelMultipleValue = [];
+    this.floatlabelValue = null;
+    this.floatlabelMultipleValue = [];
   }
 
   fillForm(): void {
